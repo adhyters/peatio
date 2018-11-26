@@ -11,7 +11,7 @@ while $running do
   # NOTE: Turn off push notifications for disabled markets.
   Market.enabled.each do |market|
     global = Global[market.id]
-    Pusher.trigger("market-#{market.id}-global", :update, asks: global.asks, bids: global.bids)
+    Pusher.trigger("market-#{market.id}-global", :update, asks: global.asks_from_db, bids: global.bids_from_db)
     tickers[market.id] = market.unit_info.merge(global.ticker)
   end
 
